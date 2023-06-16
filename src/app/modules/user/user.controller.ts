@@ -26,6 +26,7 @@ const createUser: RequestHandler = catchAsync(
   }
 );
 
+// Get all users
 const getAllUsers: RequestHandler = catchAsync(
   async (req: Request, res: Response) => {
     const filters = pick(req.query, userFilterableFields);
@@ -37,7 +38,23 @@ const getAllUsers: RequestHandler = catchAsync(
     sendResponse<IUser>(res, {
       statusCode: httpStatus.OK,
       success: true,
-      message: "User Created Successfully",
+      message: "Get All Users Successfully",
+      data: result,
+    });
+  }
+);
+
+// Get single user by id
+const getSingleUser: RequestHandler = catchAsync(
+  async (req: Request, res: Response) => {
+    const id = req.params.id;
+    const result = await UserService.getSingleUser(id);
+
+    // Send Response
+    sendResponse<IUser>(res, {
+      statusCode: httpStatus.OK,
+      success: true,
+      message: "Get Single User Successfully",
       data: result,
     });
   }
@@ -46,4 +63,5 @@ const getAllUsers: RequestHandler = catchAsync(
 export const UserController = {
   createUser,
   getAllUsers,
+  getSingleUser,
 };

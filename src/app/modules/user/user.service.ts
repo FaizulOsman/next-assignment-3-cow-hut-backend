@@ -15,6 +15,7 @@ const createUser = async (payload: IUser): Promise<IUser | null> => {
   return result;
 };
 
+// Get All Users (can also filter)
 const getAllUsers = async (
   filters: IUserFilters,
   paginationOptions: IPaginationOptions
@@ -69,7 +70,14 @@ const getAllUsers = async (
   };
 };
 
+// Get Single User
+const getSingleUser = async (id: string): Promise<IUser | null> => {
+  const result = await User.findOne({ _id: id });
+  return result;
+};
+
 export const UserService = {
   createUser,
   getAllUsers,
+  getSingleUser,
 };
