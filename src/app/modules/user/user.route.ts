@@ -19,6 +19,8 @@ router.patch(
   UserController.updateUser
 );
 
+router.delete("/users/:id", UserController.deleteUser);
+
 router.get("/users", UserController.getAllUsers);
 
 export const UserRoutes = router;
