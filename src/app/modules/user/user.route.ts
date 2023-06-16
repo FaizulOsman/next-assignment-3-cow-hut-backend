@@ -6,9 +6,11 @@ const router = express.Router();
 
 // Routes
 router.post(
-  "/create-user",
+  "/auth/signup",
   validateRequest(UserValidation.createUserZodSchema),
   UserController.createUser
 );
+
+router.get("/users", UserController.getAllUsers);
 
 export const UserRoutes = router;
