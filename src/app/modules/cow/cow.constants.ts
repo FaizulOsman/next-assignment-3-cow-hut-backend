@@ -35,6 +35,8 @@ export const cowFilterableFields = [
   "weight",
   "label",
   "category",
+  "minPrice",
+  "maxPrice",
 ];
 
 export const cowSearchableFields = [

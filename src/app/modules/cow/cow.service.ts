@@ -37,9 +37,15 @@ const getAllCows = async (
 
   if (Object.keys(filtersData).length) {
     andConditions.push({
-      $and: Object.entries(filtersData).map(([field, value]) => ({
-        [field]: value,
-      })),
+      $and: Object.entries(filtersData).map(([field, value]) => {
+        if (field === "maxPrice") {
+          return { price: { $lte: value } };
+        } else if (field === "minPrice") {
+          return { price: { $gte: value } };
+        } else {
+          return { [field]: value };
+        }
+      }),
     });
   }
 
