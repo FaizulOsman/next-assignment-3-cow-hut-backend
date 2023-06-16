@@ -1,6 +1,7 @@
 import express, { Application, NextFunction, Request, Response } from "express";
 import cors from "cors";
 import httpStatus from "http-status";
+import router from "./app/routes";
 
 const app: Application = express();
 
@@ -15,6 +16,9 @@ app.get("/", (req: Request, res: Response, next: NextFunction) => {
   res.send("Hello World!");
   next();
 });
+
+// Application Routes
+app.use("/api/v1/", router);
 
 // Handle Not Found Route
 app.use((req: Request, res: Response, next: NextFunction) => {
