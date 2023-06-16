@@ -42,9 +42,8 @@ const getAllCows = async (
           return { price: { $lte: value } };
         } else if (field === "minPrice") {
           return { price: { $gte: value } };
-        } else {
-          return { [field]: value };
         }
+        return { [field]: value };
       }),
     });
   }
