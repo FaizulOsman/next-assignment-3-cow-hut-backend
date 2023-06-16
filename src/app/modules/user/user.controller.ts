@@ -4,27 +4,9 @@ import catchAsync from "../../../shared/catchAsync";
 import sendResponse from "../../../shared/sendResponse";
 import httpStatus from "http-status";
 import { IUser } from "./user.interface";
-import ApiError from "../../../errors/ApiError";
 import pick from "../../../shared/pick";
 import { userFilterableFields } from "./user.constants";
 import { paginationFields } from "../../../constants/pagination";
-
-// Create User
-const createUser: RequestHandler = catchAsync(
-  async (req: Request, res: Response) => {
-    const { ...userData } = req.body;
-
-    const result = await UserService.createUser(userData);
-
-    // Send Response
-    sendResponse<IUser>(res, {
-      statusCode: httpStatus.OK,
-      success: true,
-      message: "User Created Successfully",
-      data: result,
-    });
-  }
-);
 
 // Get all users
 const getAllUsers: RequestHandler = catchAsync(
@@ -90,7 +72,6 @@ const deleteUser: RequestHandler = catchAsync(async (req, res) => {
 });
 
 export const UserController = {
-  createUser,
   getAllUsers,
   getSingleUser,
   updateUser,

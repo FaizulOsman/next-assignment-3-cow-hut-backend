@@ -3,14 +3,13 @@ import { Model, Types } from "mongoose";
 export type UserName = {
   firstName: string;
   lastName: string;
-  middleName: string;
 };
 
 export type IUser = {
   password: string;
   role: "seller" | "buyer";
-  name: UserName; //embedded object
-  phoneNumber: number;
+  name: UserName;
+  phoneNumber: string;
   address: string;
   budget: number;
   income: number;

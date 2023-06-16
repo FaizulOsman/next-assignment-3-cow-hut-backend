@@ -1,19 +1,11 @@
 import { SortOrder } from "mongoose";
-import config from "../../../config/index";
 import ApiError from "../../../errors/ApiError";
 import { IUser, IUserFilters } from "./user.interface";
 import { User } from "./user.model";
 import httpStatus from "http-status";
 import { IPaginationOptions } from "../../../interfaces/pagination";
-import { IGenericResponse } from "../../../interfaces/common";
 import { paginationHelpers } from "../../../helpers/paginationHelper";
-import { userFilterableFields, userSearchableFields } from "./user.constants";
-
-// Create User
-const createUser = async (payload: IUser): Promise<IUser | null> => {
-  const result = await User.create(payload);
-  return result;
-};
+import { userSearchableFields } from "./user.constants";
 
 // Get All Users (can also filter)
 const getAllUsers = async (
@@ -111,7 +103,6 @@ const deleteUser = async (id: string): Promise<IUser | null> => {
 };
 
 export const UserService = {
-  createUser,
   getAllUsers,
   getSingleUser,
   updateUser,

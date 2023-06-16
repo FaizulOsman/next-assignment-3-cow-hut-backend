@@ -5,22 +5,16 @@ import validateRequest from "../../middlewares/validateRequest";
 const router = express.Router();
 
 // Routes
-router.post(
-  "/auth/signup",
-  validateRequest(UserValidation.createUserZodSchema),
-  UserController.createUser
-);
-
-router.get("/users/:id", UserController.getSingleUser);
+router.get("/:id", UserController.getSingleUser);
 
 router.patch(
-  "/users/:id",
+  "/:id",
   validateRequest(UserValidation.createUserZodSchema),
   UserController.updateUser
 );
 
-router.delete("/users/:id", UserController.deleteUser);
+router.delete("/:id", UserController.deleteUser);
 
-router.get("/users", UserController.getAllUsers);
+router.get("/", UserController.getAllUsers);
 
 export const UserRoutes = router;
