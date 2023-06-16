@@ -4,7 +4,6 @@ import catchAsync from "../../../shared/catchAsync";
 import sendResponse from "../../../shared/sendResponse";
 import httpStatus from "http-status";
 import { ICow } from "./cow.interface";
-import ApiError from "../../../errors/ApiError";
 import pick from "../../../shared/pick";
 import { cowFilterableFields } from "./cow.constants";
 import { paginationFields } from "../../../constants/pagination";

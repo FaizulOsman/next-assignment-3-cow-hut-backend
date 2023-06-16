@@ -1,17 +1,16 @@
 import { SortOrder } from "mongoose";
-import config from "../../../config/index";
 import ApiError from "../../../errors/ApiError";
 import { ICow, ICowFilters } from "./cow.interface";
 import { Cow } from "./cow.model";
 import httpStatus from "http-status";
 import { IPaginationOptions } from "../../../interfaces/pagination";
-import { IGenericResponse } from "../../../interfaces/common";
 import { paginationHelpers } from "../../../helpers/paginationHelper";
-import { cowFilterableFields, cowSearchableFields } from "./cow.constants";
+import { cowSearchableFields } from "./cow.constants";
 
 // Create Cow
 const createCow = async (payload: ICow): Promise<ICow | null> => {
-  const result = await Cow.create(payload);
+  payload.label = "for sale";
+  const result = (await Cow.create(payload)).populate("seller");
   return result;
 };
 
