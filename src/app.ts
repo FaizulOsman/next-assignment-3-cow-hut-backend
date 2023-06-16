@@ -2,6 +2,7 @@ import express, { Application, NextFunction, Request, Response } from "express";
 import cors from "cors";
 import httpStatus from "http-status";
 import router from "./app/routes";
+import globalErrorHandler from "./app/middlewares/globalErrorHandler";
 
 const app: Application = express();
 
@@ -19,6 +20,9 @@ app.get("/", (req: Request, res: Response, next: NextFunction) => {
 
 // Application Routes
 app.use("/api/v1/", router);
+
+// Global Error Handler
+app.use(globalErrorHandler);
 
 // Handle Not Found Route
 app.use((req: Request, res: Response, next: NextFunction) => {

@@ -3,11 +3,9 @@ import { z } from "zod";
 // Define the Zod schema for creating a user
 const createUserZodSchema = z.object({
   body: z.object({
-    password: z
-      .string({
-        required_error: "Password is required",
-      })
-      .optional(),
+    password: z.string({
+      required_error: "Password is required",
+    }),
     role: z.string({
       required_error: "Role (buyer/user) is required",
     }),

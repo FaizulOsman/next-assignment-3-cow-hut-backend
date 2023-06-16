@@ -4,6 +4,7 @@ import catchAsync from "../../../shared/catchAsync";
 import sendResponse from "../../../shared/sendResponse";
 import httpStatus from "http-status";
 import { IUser } from "./user.interface";
+import ApiError from "../../../errors/ApiError";
 
 // Create User
 const createUser: RequestHandler = catchAsync(
