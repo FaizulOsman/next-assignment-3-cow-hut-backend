@@ -76,8 +76,37 @@ const getSingleUser = async (id: string): Promise<IUser | null> => {
   return result;
 };
 
+const updateUser = async (
+  id: string,
+  payload: Partial<IUser>
+): Promise<IUser | null> => {
+  const isExist = await User.findOne({ _id: id });
+
+  if (!isExist) {
+    throw new ApiError(httpStatus.BAD_REQUEST, "User not found");
+  }
+
+  const { name, ...UserData } = payload;
+
+  const updateUserData: Partial<IUser> = { ...UserData };
+
+  // dynamically handling nested fields
+  if (name && Object.keys(name)?.length > 0) {
+    Object.keys(name).forEach((key) => {
+      const nameKey = `name.${key}` as keyof Partial<IUser>; // `name.firstName`
+      (updateUserData as any)[nameKey] = name[key as keyof typeof name];
+    });
+  }
+
+  const result = await User.findOneAndUpdate({ _id: id }, updateUserData, {
+    new: true,
+  });
+  return result;
+};
+
 export const UserService = {
   createUser,
   getAllUsers,
   getSingleUser,
+  updateUser,
 };

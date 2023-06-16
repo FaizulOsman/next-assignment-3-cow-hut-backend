@@ -12,8 +12,8 @@ export type IUser = {
   name: UserName; //embedded object
   phoneNumber: number;
   address: string;
-  budget: string;
-  income: string;
+  budget: number;
+  income: number;
 };
 
 // User Model

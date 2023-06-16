@@ -13,6 +13,12 @@ router.post(
 
 router.get("/users/:id", UserController.getSingleUser);
 
+router.patch(
+  "/users/:id",
+  validateRequest(UserValidation.createUserZodSchema),
+  UserController.updateUser
+);
+
 router.get("/users", UserController.getAllUsers);
 
 export const UserRoutes = router;

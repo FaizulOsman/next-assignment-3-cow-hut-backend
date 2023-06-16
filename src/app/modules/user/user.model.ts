@@ -26,8 +26,8 @@ export const userSchema = new Schema<IUser>(
     },
     phoneNumber: { type: Number, unique: true, required: true },
     address: { type: String, required: true },
-    budget: { type: String, required: true },
-    income: { type: String, required: true },
+    budget: { type: Number, required: true },
+    income: { type: Number, required: true },
   },
   {
     timestamps: true, // It will add createdAt & updatedAt fields
