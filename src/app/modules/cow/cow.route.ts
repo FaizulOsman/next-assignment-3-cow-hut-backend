@@ -15,7 +15,7 @@ router.get("/:id", CowController.getSingleCow);
 
 router.patch(
   "/:id",
-  validateRequest(CowValidation.createCowZodSchema),
+  validateRequest(CowValidation.updateCowZodSchema),
   CowController.updateCow
 );
 

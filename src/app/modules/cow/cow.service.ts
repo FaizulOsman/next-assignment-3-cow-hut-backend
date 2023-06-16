@@ -53,6 +53,7 @@ const getAllCows = async (
     andConditions?.length > 0 ? { $and: andConditions } : {};
 
   const result = await Cow.find(whereCondition)
+    .populate("seller")
     .sort(sortCondition)
     .skip(skip)
     .limit(limit);
@@ -71,7 +72,7 @@ const getAllCows = async (
 
 // Get Single Cow
 const getSingleCow = async (id: string): Promise<ICow | null> => {
-  const result = await Cow.findOne({ _id: id });
+  const result = await Cow.findOne({ _id: id }).populate("seller");
   return result;
 };
 
@@ -80,32 +81,24 @@ const updateCow = async (
   payload: Partial<ICow>
 ): Promise<ICow | null> => {
   const isExist = await Cow.findOne({ _id: id });
-
+  console.log(isExist);
   if (!isExist) {
     throw new ApiError(httpStatus.BAD_REQUEST, "Cow not found");
   }
 
-  const { name, ...CowData } = payload;
+  const { ...CowData } = payload;
 
   const updateCowData: Partial<ICow> = { ...CowData };
 
-  // dynamically handling nested fields
-  if (name && Object.keys(name)?.length > 0) {
-    Object.keys(name).forEach((key) => {
-      const nameKey = `name.${key}` as keyof Partial<ICow>; // `name.firstName`
-      (updateCowData as any)[nameKey] = name[key as keyof typeof name];
-    });
-  }
-
   const result = await Cow.findOneAndUpdate({ _id: id }, updateCowData, {
     new: true,
-  });
+  }).populate("seller");
   return result;
 };
 
 // Delete Cow
 const deleteCow = async (id: string): Promise<ICow | null> => {
-  const result = await Cow.findByIdAndDelete({ _id: id });
+  const result = await Cow.findByIdAndDelete({ _id: id }).populate("seller");
   return result;
 };
 
