@@ -86,7 +86,6 @@ const updateCow = async (
   payload: Partial<ICow>
 ): Promise<ICow | null> => {
   const isExist = await Cow.findOne({ _id: id });
-  console.log(isExist);
   if (!isExist) {
     throw new ApiError(httpStatus.BAD_REQUEST, "Cow not found");
   }
