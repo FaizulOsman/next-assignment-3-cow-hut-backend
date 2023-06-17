@@ -9,7 +9,7 @@ router.get("/:id", UserController.getSingleUser);
 
 router.patch(
   "/:id",
-  validateRequest(UserValidation.createUserZodSchema),
+  validateRequest(UserValidation.updateUserZodSchema),
   UserController.updateUser
 );
 

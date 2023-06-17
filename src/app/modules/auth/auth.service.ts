@@ -9,6 +9,9 @@ const createAuth = async (payload: IUser): Promise<IUser | null> => {
   if (isExist) {
     throw new ApiError(httpStatus.CONFLICT, "Phone Number Already Exist");
   }
+  if (!payload.income) {
+    payload.income = 0;
+  }
 
   const result = await User.create(payload);
   return result;
