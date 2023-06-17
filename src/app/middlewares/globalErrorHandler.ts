@@ -18,7 +18,7 @@ const globalErrorHandler: ErrorRequestHandler = (
   // Log errors in production environment otherwise log in console
   config.env === "development"
     ? console.log("🔥 GlobalErrorHandler => ", error)
-    : errorLogger.error("🔥 GlobalErrorHandler => ", error);
+    : console.log("🔥 GlobalErrorHandler => ", error);
 
   let statusCode = 500; // Default status code for internal server errors
   let message = "Something went wrong!"; // Default error message
