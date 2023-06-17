@@ -6,7 +6,7 @@ const router = express.Router();
 
 // Routes
 router.post(
-  "/create-order",
+  "/",
   validateRequest(OrderValidation.createOrderZodSchema),
   OrderController.createOrder
 );
