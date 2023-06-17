@@ -2,7 +2,7 @@
 
 ## Live Link:
 
-https://cow-hut-backend-gray.vercel.app/
+https://goru-kena-becha.vercel.app/
 
 ## Application Routes:
 
