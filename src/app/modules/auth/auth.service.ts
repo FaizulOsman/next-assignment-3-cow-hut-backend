@@ -12,6 +12,13 @@ const createAuth = async (payload: IUser): Promise<IUser | null> => {
   if (!payload.income) {
     payload.income = 0;
   }
+  if (payload.role === "seller") {
+    payload.budget = 0;
+    payload.income = 0;
+  }
+  if (payload.role === "buyer") {
+    payload.income = 0;
+  }
 
   const result = await User.create(payload);
   return result;
