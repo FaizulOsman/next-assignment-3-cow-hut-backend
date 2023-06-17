@@ -6,10 +6,17 @@ import httpStatus from "http-status";
 import { IPaginationOptions } from "../../../interfaces/pagination";
 import { paginationHelpers } from "../../../helpers/paginationHelper";
 import { cowSearchableFields } from "./cow.constants";
+import { User } from "../user/user.model";
 
 // Create Cow
 const createCow = async (payload: ICow): Promise<ICow | null> => {
   payload.label = "for sale";
+  // Throw error when seller not found
+  const seller = await User.find({ _id: payload.seller });
+  if (seller.length === 0) {
+    throw new ApiError(httpStatus.NOT_FOUND, "Seller not found");
+  }
+
   const result = (await Cow.create(payload)).populate("seller");
   return result;
 };
